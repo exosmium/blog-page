@@ -12,6 +12,11 @@ import {
   Home,
   User,
   Send,
+  Database,
+  Code2,
+  Shield,
+  Layout,
+  Github,
 } from 'lucide-react';
 import {
   format,
@@ -23,6 +28,8 @@ import {
   parseISO,
 } from 'date-fns';
 import { supabase, type Entry, type Comment, type Like } from './lib/supabase';
+import axios from 'axios';
+import Particles from 'react-tsparticles';
 
 function AboutPage() {
   return (
@@ -38,19 +45,16 @@ function AboutPage() {
           animate={{ x: 0, opacity: 1 }}
           transition={{ delay: 0.2 }}
         >
-          <h2 className="text-3xl font-bold mb-4 glitch" data-text="About Me">
-            About Me
+          <h2 className="text-3xl font-bold mb-4 glitch" data-text="Valery Karklins">
+            Valerijs Karklins
           </h2>
-          <img
-            src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&h=400&fit=crop"
+          {/* <img
+            src="https://media.licdn.com/dms/image/v2/D4D03AQEQDwPWGYqseg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1718245141331?e=1746057600&v=beta&t=sVkuBS3ZoI58EoX2kYz-ZhGMS04wjca1kOh3I-9vd-I"
             alt="Profile"
             className="w-32 h-32 rounded-full border-4 border-white/10 mb-6"
-          />
+          /> */}
           <p className="text-lg text-gray-300 leading-relaxed mb-6">
-            Hi, I'm Sarah Chen, a digital storyteller and observer of life's
-            quiet moments. Through this daily blog, I capture the essence of
-            each day, transforming ordinary experiences into written reflections
-            that explore the deeper meanings hidden in our daily routines.
+            As a detail-oriented and ambitious developer, I thrive on solving complex problems and optimizing systems. I value efficiency, clean code, and well-structured designs, always striving to deliver high-quality work. My strong analytical mindset drives me to experiment with new technologies that enhance my workflow. I also embrace creativity in UI/UX, ensuring that my software is not only functional but also intuitive and user-friendly. Currently, I'm focused on improving my Spanish, specifically for technical discussions, as I believe that effective communication is key to collaboration and success in any project.
           </p>
         </motion.div>
 
@@ -62,10 +66,7 @@ function AboutPage() {
         >
           <h3 className="text-xl font-semibold mb-2">My Journey</h3>
           <p className="text-gray-300">
-            With a background in philosophy and modern literature, I've spent
-            the last decade documenting life's subtle nuances. This blog serves
-            as a digital time capsule, preserving moments that might otherwise
-            slip through the cracks of memory.
+            With over four years of programming experience, I focus on backend development, optimizing database structures, and creating user-friendly applications. I take pride in my work and strive to make a positive impact through technology.
           </p>
         </motion.div>
 
@@ -76,16 +77,51 @@ function AboutPage() {
           className="grid grid-cols-1 md:grid-cols-3 gap-4"
         >
           <div className="stat-card">
-            <h4 className="font-semibold mb-2">Writing Since</h4>
-            <p className="text-2xl">2019</p>
+            <h4 className="font-semibold mb-2">Experience</h4>
+            <p className="text-2xl">4+ Years</p>
           </div>
           <div className="stat-card">
-            <h4 className="font-semibold mb-2">Daily Entries</h4>
-            <p className="text-2xl">1,460+</p>
+            <h4 className="font-semibold mb-2">Projects</h4>
+            <p className="text-2xl">20+</p>
           </div>
           <div className="stat-card">
-            <h4 className="font-semibold mb-2">Cups of Coffee</h4>
-            <p className="text-2xl">∞</p>
+            <h4 className="font-semibold mb-2">Tech Stack</h4>
+            <p className="text-2xl">Full-Stack</p>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ x: -20, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="space-y-4"
+        >
+          <h3 className="text-xl font-semibold mb-4">Technologies I Work With</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="stat-card flex items-center gap-2">
+              <div className="w-8 h-8 flex items-center justify-center">
+                <Database className="w-5 h-5" />
+              </div>
+              <span>SQL & GraphQL</span>
+            </div>
+            <div className="stat-card flex items-center gap-2">
+              <div className="w-8 h-8 flex items-center justify-center">
+                <Code2 className="w-5 h-5" />
+              </div>
+              <span>Java</span>
+            </div>
+            <div className="stat-card flex items-center gap-2">
+              <div className="w-8 h-8 flex items-center justify-center">
+                <Shield className="w-5 h-5" />
+              </div>
+              <span>Firebase Auth</span>
+            </div>
+            <div className="stat-card flex items-center gap-2">
+              <div className="w-8 h-8 flex items-center justify-center">
+                <Layout className="w-5 h-5" />
+              </div>
+              <span>PrimeVue</span>
+            </div>
           </div>
         </motion.div>
 
@@ -96,27 +132,36 @@ function AboutPage() {
         >
           <h3 className="text-xl font-semibold mb-4">Connect With Me</h3>
           <div className="flex gap-4">
-            <motion.button
+            <motion.a
+              href="https://t.me/exosmium"
+              target="_blank"
+              rel="noopener noreferrer"
               className="date-nav-button flex items-center gap-2"
               whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
             >
-              Twitter
-            </motion.button>
-            <motion.button
+              <Send className="w-5 h-5" />
+              Telegram
+            </motion.a>
+            <motion.a
+              href="https://github.com/exosmium"
+              target="_blank"
+              rel="noopener noreferrer"
               className="date-nav-button flex items-center gap-2"
               whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
             >
-              Instagram
-            </motion.button>
-            <motion.button
+              <Github className="w-5 h-5" />
+              GitHub
+            </motion.a>
+            <motion.a
+              href="https://www.linkedin.com/in/valerijs-karklins-591692289/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="date-nav-button flex items-center gap-2"
               whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
             >
+              <User className="w-5 h-5" />
               LinkedIn
-            </motion.button>
+            </motion.a>
           </div>
         </motion.div>
       </div>
@@ -168,11 +213,14 @@ function App() {
   useEffect(() => {
     const fetchEntry = async () => {
       try {
+        const formattedDate = format(currentDate, 'yyyy-MM-dd');
+        console.log('Fetching entry for date:', formattedDate); // Debug log
+
         const { data: entries, error: entriesError } = await supabase
           .from('entries')
-          .select()
-          .eq('date', format(currentDate, 'yyyy-MM-dd'))
-          .single();
+          .select('*, comments(*), likes(*)')
+          .eq('date', formattedDate)
+          .maybeSingle(); // Use maybeSingle() instead of single()
 
         if (entriesError) {
           console.error('Error fetching entry:', entriesError);
@@ -180,35 +228,19 @@ function App() {
           return;
         }
 
+        setEntry(entries || null);
+        
         if (entries) {
-          setEntry(entries);
-
-          // Fetch comments and likes
-          const { data: comments, error: commentsError } = await supabase
-            .from('comments')
-            .select()
-            .eq('entry_id', entries.id)
-            .order('created_at', { ascending: true });
-
-          if (commentsError) {
-            console.error('Error fetching comments:', commentsError);
-          } else {
-            setComments(comments || []);
-          }
-
-          const { data: likes, error: likesError } = await supabase
-            .from('likes')
-            .select()
-            .eq('entry_id', entries.id);
-
-          if (likesError) {
-            console.error('Error fetching likes:', likesError);
-          } else {
-            setLikes(likes || []);
-          }
+          // Update comments and likes if entry exists
+          setComments(entries.comments || []);
+          setLikes(entries.likes || []);
+        } else {
+          setComments([]);
+          setLikes([]);
         }
       } catch (error) {
         console.error('Error in fetchEntry:', error);
+        setEntry(null);
       }
     };
 
@@ -301,10 +333,118 @@ function App() {
     end: endOfMonth(currentDate),
   });
 
+  const addNewBlogEntry = async (text: string) => {
+    try {
+      // Post directly to Supabase without user ID
+      const { data, error } = await supabase
+        .from('entries')
+        .insert({
+          content: text,
+          mood: 'neutral',
+          date: format(new Date(), 'yyyy-MM-dd'), // Use date-fns format
+        })
+        .select()
+        .single();
+
+      if (error) {
+        console.error('Error adding new blog entry:', error);
+      } else {
+        console.log('New blog entry added:', data);
+        // Optionally refresh the current entry
+        await fetchEntry();
+      }
+    } catch (error) {
+      console.error('Error in addNewBlogEntry:', error);
+    }
+  };
+
+  // Example of calling addNewBlogEntry based on a user action
+  const handleAddEntry = () => {
+    const entryText = "Your new blog entry text here"; // Replace with actual text
+    addNewBlogEntry(entryText);
+  };
+
   return (
     <div className="min-h-screen bg-black text-white flex flex-col relative">
-      <div className="noise" />
-      <div className="chess-pattern fixed inset-0 opacity-10" />
+      {/* Particles Background */}
+      <Particles
+        className="particles"
+        options={{
+          particles: {
+            number: {
+              value: 100,
+              density: {
+                enable: true,
+                value_area: 800,
+              },
+            },
+            size: {
+              value: 3,
+            },
+            move: {
+              enable: true,
+              speed: 1,
+              direction: "none",
+              random: true,
+              straight: false,
+              out_mode: "out",
+              bounce: false,
+              attract: {
+                enable: false,
+              },
+            },
+            line_linked: {
+              enable: true,
+              distance: 150,
+              color: "#ffffff",
+              opacity: 0.4,
+              width: 1,
+            },
+          },
+          interactivity: {
+            events: {
+              onhover: {
+                enable: true,
+                mode: "repulse",
+              },
+              onclick: {
+                enable: true,
+                mode: "push",
+              },
+              resize: true,
+            },
+            modes: {
+              grab: {
+                distance: 400,
+                line_linked: {
+                  opacity: 1,
+                },
+              },
+              bubble: {
+                distance: 400,
+                size: 40,
+                duration: 2,
+                opacity: 8,
+                speed: 3,
+              },
+              repulse: {
+                distance: 200,
+                duration: 0.4,
+              },
+              push: {
+                particles_nb: 4,
+              },
+              remove: {
+                particles_nb: 2,
+              },
+            },
+          },
+          retina_detect: true,
+        }}
+      />
+
+      {/* Gradient Background Lines */}
+      <div className="gradient-lines" />
 
       {/* Navigation Header */}
       <motion.header
@@ -607,7 +747,7 @@ function App() {
                               placeholder="Add a comment..."
                               className="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-2 focus:outline-none focus:border-white/30"
                             />
-                            <motion.button
+                            <motion.buttonR
                               type="submit"
                               className="date-nav-button"
                               whileHover={{ scale: 1.05 }}
@@ -615,7 +755,7 @@ function App() {
                               disabled={!newComment.trim()}
                             >
                               <Send className="w-5 h-5" />
-                            </motion.button>
+                            </motion.buttonR>
                           </form>
                         )}
                       </motion.div>
@@ -643,6 +783,7 @@ function App() {
             <AboutPage />
           )}
         </AnimatePresence>
+
       </main>
     </div>
   );
